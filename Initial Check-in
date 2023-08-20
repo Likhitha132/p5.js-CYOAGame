@@ -1,0 +1,159 @@
+//Press a button to choose your path
+//See the README file for more information
+
+/* VARIABLES */
+let enterButton;
+let a1Button;
+let a2Button;
+let b1Button;
+let b2Button;
+let screen = 0;
+let bgColor = "indigo";
+
+/* SETUP RUNS ONCE */
+function setup() {
+  createCanvas(600, 400);
+  textAlign(CENTER);
+  noStroke();
+
+  // Set up the home screen
+  background(bgColor);
+  textSize(25);
+  fill(255,204,0);
+  text("Pirate's Treasure", 150,75);
+  fill(153,0,255);
+  rect(0,0,600,25);
+  textSize(17);
+  fill("white");
+  text("Captain Blackbeard, a greedy pirate, docks his ship at shore on an island. \nAs he got off the ship, he unexpectedly encountered a map with the location \nof a hidden treasure. He jumps with joy due to his new discovery, however,",width / 2,height / 2 - 75);
+  text("he does not inform any of his crewmates as he did not want to share any of \nthe treasure! He notices that the map has many possible routes he can \ntake to reach the treasure. Will you safely lead him to the treasure?", width/2, height/2 -10);
+
+  // Create buttons for all screens
+  enterButton = new Sprite(width / 2, height / 2 + 100);
+  a1Button = new Sprite(-200, -200);
+  a2Button = new Sprite(-50, -50);
+  b1Button = new Sprite(-100,-100);
+  b2Button = new Sprite(-150,-150);
+}
+
+/* DRAW LOOP REPEATS */
+function draw() {
+  // Draw enter button
+  enterButton.w = 100;
+  enterButton.h = 50;
+  enterButton.collider = "k";
+  enterButton.text = "Begin the \njourney";
+  enterButton.color = "orange";
+
+  
+  // Check enter button
+  if (enterButton.mouse.presses()) {
+    showScreen1();
+    screen = 1;
+  }
+
+  if (screen == 1) {
+    if (a1Button.mouse.presses()) {
+      showScreen2();
+      screen = 2;
+    } else if (a2Button.mouse.presses()) {
+      showScreen5();
+      screen = 5;
+    }
+  }
+
+  if (screen == 2) {
+    if (b1Button.mouse.presses()){
+      showScreen3();
+      screen = 3;
+    } else if (b2Button.mouse.pressed()) {
+      showScreen4();
+      screen = 4;
+    }
+  }
+
+  print(screen);
+}
+
+/* FUNCTIONS TO DISPLAY SCREENS */
+function showScreen1() {
+  //print("Enter the game")
+  background(153,102,255);
+  textSize(18);
+  fill(0);
+  text("The map shows that there are two paths heading in opposite \ndirections. One points to a thick forest and the other one \npoints to tall and ridged mountains. However, the longer \npath is the one that heads though the forest.",width / 2,height / 2 - 120);
+  textSize(17);
+  text("The path you choose decides your future. Choose carefully!", width/2, height/2 -10);
+  
+  // Move extra buttons off screen
+  enterButton.pos = { x: -100, y: -100 }; //do with x and y together first
+  b1Button.pos = { x: -100, y: -100 };
+  b2Button.pos = { x: -150, y: -150 };
+
+  // Add a1 button
+  a1Button.pos = { x: width / 2 - 100, y: height / 2 + 100 };
+  a1Button.w = 100;
+  a1Button.h = 50;
+  a1Button.collider = "k";
+  a1Button.color = "plum";
+  a1Button.text = "Forest";
+
+  // Add a2 button
+  a2Button.pos = { x: width / 2 + 100, y: height / 2 + 100 };
+  a2Button.w = 100;
+  a2Button.h = 50;
+  a2Button.collider = "k";
+  a2Button.color = "plum";
+  a2Button.text = "Mountains";
+}
+
+
+
+function showScreen2() {
+  print("Display screen 2");
+  background(153,102,255);
+  text("You walk into the forest safely with the satisfaction of choosing \nthe right path. Then you see that there are another two paths you\n can possibly take from there, annoyed that there \nis a lot to do to find the treasure.",width / 2,height / 2 - 140);
+  text("One path requires crossing a clean and rapid current river, \nwhile the other path means you must walk through a spooky and dark \narea of the forest. The walk through the forest is longer as it \naverts you from crossing the river.", width/2, height/2 -25);
+  
+  // Move extra buttons off screen
+  a1Button.pos = { x: -200, y: -200 };
+  a2Button.pos = { x: -50, y: -50 };
+  // Add b1 Button
+  b1Button.pos = { x: width / 2 - 100, y: height / 2 + 100 };
+  b1Button.w = 100;
+  b1Button.h = 50;
+  b1Button.collider = "k";
+  b1Button.color = "plum";
+  b1Button.text = "Spooky \nforest";
+  // Add b2 Button
+  b2Button.pos = { x: width / 2 + 100, y: height / 2 + 100 };
+  b2Button.w = 100;
+  b2Button.h = 50;
+  b2Button.collider = "k";
+  b2Button.color = "plum";
+  b2Button.text = "Rapid \nriver";
+}
+
+function showScreen3(){
+  background(153,102,255);
+  text("You walk through the forest for many hours, even though it seems like many \ndays have passed. After all that work, you finally reach a waterfall! The \nmap shows that right behind the waterfall is the hidden treasure. You \nmanage to climb the rocks and walk into a cave behind the waterfall, \nwhere you find a chest full of riches including coins, necklaces and gold bars! \nYou fall alseep there after being exhausted from the journey, only to find \nthat when you wake up, the map and all the gold in the chest is gone! You \ncarefully run to the edge of the cave and see your crew happily walking back \nwith all the riches and the map. You realize that the crew had followed you \nsilently, took all the treasure, and bailed, leaving you with nothing to keep.", width/2, height/2 -100);
+  b1Button.pos = { x: -200, y: -200 };
+  b2Button.pos = { x: -50, y: -50 };
+}
+
+function showScreen4(){
+  background(255,77,77);
+  text("OH NO! You chose to swim across the rapid river, but little did you know, \nit was filled with hungry crocodiles! You don't manage to escape \nand the map marked with the secret treasure is eaten by one of the \ncrocodiles. The treasure will never befound now! \nServes you right for your greediness!", width/2, height/2 -100);
+  b1Button.pos = { x: -200, y: -200 };
+  b2Button.pos = { x: -50, y: -50 };
+}
+
+function showScreen5() {
+  print("Display screen 5");
+  background(255,77,77);
+  textSize(20);
+  text("OH NO! The mountains were super steep and ridged, \ncausing you to have trouble crossing them. You somehow \nmanage to climb almost to the top of the mountain, \nwhen you accidentally slip! You do not make it through the fall \nand the map is still with you, but as you didn't tell anyone \nabout leaving, no one knows your location! \nThe treasure is never to be found.", width / 2, height / 2 - 100);
+  // Move extra buttons off screen
+  a1Button.pos = { x: -200, y: -200 };
+  a2Button.pos = { x: -50, y: -50 };
+}
